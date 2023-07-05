@@ -66,4 +66,17 @@
 
 
 
-    
+# sc-test3 - modified test
+../nextflow/launch.sh kuberun nf-core/scrnaseq \
+    --input 'samplesheet.csv' \
+    --outdir 'first' \
+    -head-image 'cerit.io/nextflow/nextflow:22.11.1' \
+    -head-memory 4096Mi \
+    -head-cpus 1 \
+    -head-prescript /mnt/nextflow-cfg.sh
+
+# sc-nextflow-only
+../nextflow/launch.sh kuberun nf-core/scrnaseq -profile conda --input ss.csv --outdir outdir
+
+# je to tento problem?
+https://github.com/nextflow-io/nextflow/issues/1606
