@@ -80,3 +80,9 @@
 
 # je to tento problem?
 https://github.com/nextflow-io/nextflow/issues/1606
+https://sciwiki.fredhutch.org/compdemos/nextflow/
+
+
+# toto v EMBLu jede:
+nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile test,singularity -c tomas.config --max_memory 128.GB --max_cpus 32 -resume
+
