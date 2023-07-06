@@ -88,9 +88,10 @@ nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile t
 
 
 
-
-pvc-beegfs
-
+##################################################################################################################
+###################
+# Finally working #
+###################
 
 /home/user/nextflow/launch.sh  kuberun nf-core/scrnaseq \
   -v 'pvc-beegfs:/mnt2' \
@@ -100,8 +101,32 @@ pvc-beegfs
   -head-prescript /mnt/nextflow-cfg.sh \
   -c custom.config \
   -remoteProfile test,docker \
-  --outdir /mnt2/sc-test/out \
+  --outdir /mnt2/XXX/out \
   -resume
+  
+#######################
+### nextflow.config ###
+#######################
 
+k8s {
+   namespace = 'medgen-ns'
+   runAsUser = 1000
+   computeResourceType = 'Job'
+   pullPolicy = 'IfNotPresent'
+   launchDir = '/mnt2/XXX'
+   workDir = '/mnt2/XXX/tmp'
+   projectDir = '/mnt2/XXX/proj'
+   storageClaimName = 'pvc-beegfs'
+   storageMountPath = '/mnt2'
+}
 
+executor {
+   queueSize = 200
+}
+
+process {
+   executor = 'k8s'
+   pod = [[securityContext:[fsGroupChangePolicy:'OnRootMismatch', runAsUser:1000, runAsGroup:1, fsGroup:1]], [automountServiceAccountToken:false], [env:'JAVA_OPTS', value:'-XX:ParallelGCThreads=4'], [env:'HOME', value:'/tmp']]
+}
+##################################################################################################################
 
