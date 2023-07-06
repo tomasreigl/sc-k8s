@@ -93,9 +93,9 @@ nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile t
 ##### Finally working #####
 ###########################
 
-###########
-# Command #
-###########
+################
+# Test Command #
+################
 /home/user/nextflow/launch.sh  kuberun nf-core/scrnaseq \
   -v 'pvc-beegfs:/mnt2' \
   -head-image 'cerit.io/nextflow/nextflow:22.11.1' \
@@ -106,6 +106,19 @@ nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile t
   -remoteProfile test,docker \
   --outdir /mnt2/XXX/out \
   -resume
+
+###########
+# Command #
+###########
+/home/user/nextflow/launch.sh  kuberun nf-core/scrnaseq \
+  -v 'pvc-beegfs:/mnt2' \
+  -head-image 'cerit.io/nextflow/nextflow:22.11.1' \
+  -head-memory 4096Mi \
+  -head-cpus 1 \
+  -head-prescript /mnt/nextflow-cfg.sh \
+  -c custom.config \
+  -remoteProfile docker \
+  --outdir /mnt2/XXX/out
   
 #######################
 ### nextflow.config ###
