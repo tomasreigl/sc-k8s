@@ -93,7 +93,7 @@ pvc-beegfs
 
 
 ~/nextflow/launch.sh  kuberun nf-core/scrnaseq \
-  -v 'pvc-beegfs' \
+  -v 'pvc-beegfs:/mnt2' \
   -head-image 'cerit.io/nextflow/nextflow:22.11.1' \
   -head-memory 4096Mi \
   -head-cpus 1 \
