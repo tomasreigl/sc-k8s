@@ -86,3 +86,14 @@ https://sciwiki.fredhutch.org/compdemos/nextflow/
 # toto v EMBLu jede:
 nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile test,singularity -c tomas.config --max_memory 128.GB --max_cpus 32 -resume
 
+
+
+
+
+
+
+
+~/nextflow/launch.sh  kuberun nf-core/scrnaseq   -v 'pvc-reiglbibs-storage-elixir1-cerit-sc-cz:/mnt'   -head-image 'cerit.io/nextflow/nextflow:22.11.1'   -head-memory 4096Mi   -head-cpus 1   -head-prescript /mnt/nextflow-cfg.sh   -c custom.config   -remoteProfile test,docker   --outdir /mnt/shared/MedGen/scRNA_reigl/sc-local-mnt/out -resume
+
+
+
