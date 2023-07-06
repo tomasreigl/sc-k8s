@@ -89,9 +89,13 @@ nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile t
 
 
 ##################################################################################################################
-###################
-# Finally working #
-###################
+###########################
+##### Finally working #####
+###########################
+
+###########
+# Command #
+###########
 
 /home/user/nextflow/launch.sh  kuberun nf-core/scrnaseq \
   -v 'pvc-beegfs:/mnt2' \
@@ -128,5 +132,12 @@ process {
    executor = 'k8s'
    pod = [[securityContext:[fsGroupChangePolicy:'OnRootMismatch', runAsUser:1000, runAsGroup:1, fsGroup:1]], [automountServiceAccountToken:false], [env:'JAVA_OPTS', value:'-XX:ParallelGCThreads=4'], [env:'HOME', value:'/tmp']]
 }
+
+### samplesheet.csv ###
+
+sample,fastq_1,fastq_2
+CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
+CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
 ##################################################################################################################
 
