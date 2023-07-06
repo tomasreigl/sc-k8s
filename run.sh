@@ -96,7 +96,6 @@ nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile t
 ###########
 # Command #
 ###########
-
 /home/user/nextflow/launch.sh  kuberun nf-core/scrnaseq \
   -v 'pvc-beegfs:/mnt2' \
   -head-image 'cerit.io/nextflow/nextflow:22.11.1' \
@@ -111,7 +110,6 @@ nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile t
 #######################
 ### nextflow.config ###
 #######################
-
 k8s {
    namespace = 'medgen-ns'
    runAsUser = 1000
@@ -133,11 +131,36 @@ process {
    pod = [[securityContext:[fsGroupChangePolicy:'OnRootMismatch', runAsUser:1000, runAsGroup:1, fsGroup:1]], [automountServiceAccountToken:false], [env:'JAVA_OPTS', value:'-XX:ParallelGCThreads=4'], [env:'HOME', value:'/tmp']]
 }
 
+#######################
 ### samplesheet.csv ###
-
+#######################
 sample,fastq_1,fastq_2
 CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
 CONTROL_REP1,AEG588A1_S1_L003_R1_001.fastq.gz,AEG588A1_S1_L003_R2_001.fastq.gz
 CONTROL_REP1,AEG588A1_S1_L004_R1_001.fastq.gz,AEG588A1_S1_L004_R2_001.fastq.gz
+
+#####################
+### custom.config ###
+#####################
+dag {
+   enabled = true
+   file = './results/pipeline_info/pipeline_dag.svg'
+}
+
+report {
+   enabled = true
+   file = './results/pipeline_info/execution_report.html'
+}
+
+timeline {
+   enabled = true
+   file = './results/pipeline_info/execution_timeline.html'
+}
+
+trace {
+   enabled = true
+   file = './results/pipeline_info/execution_trace.txt'
+}
+
 ##################################################################################################################
 
