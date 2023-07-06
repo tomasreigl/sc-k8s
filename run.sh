@@ -92,7 +92,7 @@ nextflow run nf-core/scrnaseq --input samplesheet.csv --outdir output -profile t
 pvc-beegfs
 
 
-~/nextflow/launch.sh  kuberun nf-core/scrnaseq \
+/home/user/nextflow/launch.sh  kuberun nf-core/scrnaseq \
   -v 'pvc-beegfs:/mnt2' \
   -head-image 'cerit.io/nextflow/nextflow:22.11.1' \
   -head-memory 4096Mi \
