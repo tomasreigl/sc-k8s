@@ -176,4 +176,27 @@ trace {
 }
 
 ##################################################################################################################
+# clean-up run folder
+rm -rf proj/ results/ tmp/ \?/ .nextflow*
+
+#####
+
+
+
+/home/user/nextflow/launch.sh  kuberun nf-core/smartseq2 \
+  -r dev \
+  -v 'pvc-beegfs:/mnt2' \
+  -head-image 'cerit.io/nextflow/nextflow:22.11.1' \
+  -head-memory 4096Mi \
+  -head-cpus 1 \
+  -head-prescript /mnt/nextflow-cfg.sh \
+  -c custom.config \
+  -remoteProfile docker \
+  --reads '/mnt2/sc-SMRT-nf/data_in/*.fastq.gz' \
+  --fasta /mnt2/sc-SMRT-nf/genome/G.fa \
+  --gtf /mnt2/sc-SMRT-nf/genome/G.gtf
+
+
+
+
 
